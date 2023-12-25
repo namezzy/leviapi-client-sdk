@@ -21,6 +21,8 @@ import static top.withlevi.leviapiclientsdk.utils.SignUtils.genSign;
  */
 public class LeviApiClient {
 
+    private static final  String GATEWAY_HOST = "http://localhost:8090";
+
     private String accessKey;
 
     private String secretKey;
@@ -35,7 +37,7 @@ public class LeviApiClient {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
 
-        String result = HttpUtil.get("http://localhost:8123/api/name/", paramMap);
+        String result = HttpUtil.get(GATEWAY_HOST+"/api/name/", paramMap);
         System.out.println(result);
         return result;
     }
@@ -46,7 +48,7 @@ public class LeviApiClient {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
 
-        String result = HttpUtil.post("http://localhost:8123/api/name/", paramMap);
+        String result = HttpUtil.post(GATEWAY_HOST+"/api/name/", paramMap);
         System.out.println(result);
         return result;
     }
@@ -75,7 +77,7 @@ public class LeviApiClient {
     public String getUsernameByPost(User user) {
 
         String json = JSONUtil.toJsonStr(user);
-        HttpResponse httpResponse = HttpRequest.post("http://localhost:8123/api/name/user")
+        HttpResponse httpResponse = HttpRequest.post(GATEWAY_HOST+"/api/name/user")
                 .addHeaders(genHeaderMap(json))
                 .body(json)
                 .execute();
